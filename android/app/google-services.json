@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "320012154494",
+    "project_id": "konnnect-df6d3",
+    "storage_bucket": "konnnect-df6d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320012154494:android:6bf706283138a5b0688a2f",
+        "android_client_info": {
+          "package_name": "com.konnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYAn3DS2irXl43tgOXEr-hyl_CRBTq1o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
