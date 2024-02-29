@@ -62,17 +62,15 @@ const LoginScreen = ({navigation}) => {
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity> */}
 
-      {Platform.OS === 'android' ? (
-        <View>
-          <SocialButton
-            buttonTitle="Sign In with Google"
-            btnType="google"
-            color={Colors.googleRed}
-            backgroundColor={Colors.googleBackground}
-            onPress={() => googleLogin()}
-          />
-        </View>
-      ) : null}
+      <View>
+        <SocialButton
+          buttonTitle="Sign In with Google"
+          btnType="google"
+          color={Colors.googleRed}
+          backgroundColor={Colors.googleBackground}
+          onPress={() => googleLogin()}
+        />
+      </View>
 
       <TouchableOpacity
         style={styles.forgotButton}
