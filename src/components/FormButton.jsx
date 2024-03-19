@@ -28,6 +28,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: Colors.white,
-        fontFamily: 'Lato-Regular',
     },
 });

@@ -1,10 +1,18 @@
-import { View, Text } from 'react-native';
+import { View, Image } from 'react-native';
 import React from 'react';
+import { Colors } from '../utils/Colors';
+import AchievementCard from '../components/AchievementCard';
+import DefaultProfileImage from '../assets/images/defaultProfile.png'
 
-const AchievementScreen = () => {
+const AchievementScreen = ({navigation}) => {
   return (
     <View>
-      <Text>AchievementScreen</Text>
+      <AchievementCard
+        starname="star1"
+        days={1} 
+        img=""
+        onPress={() => navigation.navigate('AchieveStar')}
+      />
     </View>
   );
 };

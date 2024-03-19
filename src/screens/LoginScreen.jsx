@@ -4,10 +4,8 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  Platform,
   StyleSheet,
   ScrollView,
-  Alert
 } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
@@ -19,17 +17,17 @@ const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const {login, googleLogin} = useContext(AuthContext);
+  const {googleLogin} = useContext(AuthContext);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <Image
         source={require('../assets/images/Logo.png')}
         style={styles.logo}
       />
       <Text style={styles.text}>Konnect App</Text>
 
-      <FormInput
+      {/* <FormInput
         labelValue={email}
         onChangeText={(userEmail) => setEmail(userEmail)}
         placeholderText="Email"
@@ -45,9 +43,9 @@ const LoginScreen = ({navigation}) => {
         placeholderText="Password"
         iconType="lock-outline"
         secureTextEntry={true}
-      />
+      /> */}
 
-      <FormButton
+      {/* <FormButton
         buttonTitle="Sign In"
         onPress={() => {
           if(email && password){
@@ -56,7 +54,7 @@ const LoginScreen = ({navigation}) => {
             Alert.alert('Please fill in email and password.')
           }
         }}
-      />
+      /> */}
 
       {/* <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
@@ -72,14 +70,14 @@ const LoginScreen = ({navigation}) => {
         />
       </View>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.forgotButton}
         onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.navButtonText}>
           Don't have an acount? Create here
         </Text>
-      </TouchableOpacity>
-    </ScrollView>
+      </TouchableOpacity> */}
+    </View>
   );
 };
 
@@ -87,10 +85,10 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    paddingTop: 50
   },
   logo: {
     height: 150,
@@ -98,21 +96,20 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   text: {
-    fontFamily: 'Kufam-SemiBoldItalic',
     fontSize: 28,
     marginBottom: 10,
     color: Colors.black,
   },
-  navButton: {
-    marginTop: 15,
-  },
-  forgotButton: {
-    marginVertical: 35,
-  },
-  navButtonText: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: Colors.primaryColor,
-    fontFamily: 'Lato-Regular',
-  },
+  // navButton: {
+  //   marginTop: 15,
+  // },
+  // forgotButton: {
+  //   marginVertical: 35,
+  // },
+  // navButtonText: {
+  //   fontSize: 18,
+  //   fontWeight: '500',
+  //   color: Colors.primaryColor,
+  //   fontFamily: 'Lato-Regular',
+  // },
 });

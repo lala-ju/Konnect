@@ -16,7 +16,7 @@ const FormInput = ({labelValue, placeholderText, iconType, ...rest}) => {
         style={styles.input}
         numberOfLines={1}
         placeholder={placeholderText}
-        placeholderTextColor={Colors.grey}
+        placeholderTextColor={Colors.lightgrey}
         {...rest}
       />
     </View>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '100%',
     height: windowHeight / 15,
-    borderColor: Colors.borderGrey,
+    borderColor: Colors.darkgrey,
     borderRadius: 3,
     borderWidth: 1,
     flexDirection: 'row',
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRightColor: Colors.grey,
+    borderRightColor: Colors.darkgrey,
     borderRightWidth: 1,
     width: 50,
   },
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     fontSize: 16,
-    fontFamily: 'Lato-Regular',
     color: Colors.black,
     justifyContent: 'center',
     alignItems: 'center',

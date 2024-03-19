@@ -2,13 +2,11 @@ import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {windowHeight, windowWidth} from '../utils/Dimension';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-const SocialButton = ({
+const GeneralButton = ({
   buttonTitle,
-  btnType,
   color,
   backgroundColor,
+  aligned,
   ...rest
 }) => {
   let bgColor = backgroundColor;
@@ -16,17 +14,14 @@ const SocialButton = ({
     <TouchableOpacity
       style={[styles.buttonContainer, {backgroundColor: bgColor}]}
       {...rest}>
-      <View style={styles.iconWrapper}>
-        <FontAwesome name={btnType} style={styles.icon} size={22} color={color} />
-      </View>
-      <View style={styles.btnTxtWrapper}>
+      <View style={[styles.btnTxtWrapper, {alignItems: aligned}]}>
         <Text style={[styles.buttonText, {color: color}]}>{buttonTitle}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-export default SocialButton;
+export default GeneralButton;
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -36,14 +31,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     borderRadius: 3,
-  },
-  iconWrapper: {
-    width: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  icon: {
-    fontWeight: 'bold',
   },
   btnTxtWrapper: {
     flex: 1,

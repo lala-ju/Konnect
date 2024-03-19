@@ -2,6 +2,7 @@ import React, {createContext, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import firestore from '@react-native-firebase/firestore';
 
 export const AuthContext = createContext();
 
@@ -28,7 +29,29 @@ export const AuthProvider = ({children}) => {
             const {idToken} = await GoogleSignin.signIn();
             const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-            await auth().signInWithCredential(googleCredential);
+            await auth().signInWithCredential(googleCredential)
+            .then(() => {
+              const userRef = firestore().collection('users').doc(auth().currentUser.uid);
+              userRef.get().then((docSnapshot) => {
+                  if (! docSnapshot.exists) {
+                    userRef.set({
+                      userImg: null,
+                      username: '',
+                      bio: '',
+                      email: auth().currentUser.email,
+                      createdAt: firestore.FieldValue.serverTimestamp(),
+                      likedStars: [],
+                      numPost: 0,
+                    })
+                    .catch(error => {
+                      console.log('Something went wrong with added user to firestore: ', error);
+                    })
+                  }
+              });
+            })
+            .catch(error => {
+              console.log('Something went wrong with sign up or sign in: ', error);
+            })
           } catch(error){
             console.log({error});
           }
