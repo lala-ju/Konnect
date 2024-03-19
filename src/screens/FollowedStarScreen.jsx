@@ -1,11 +1,16 @@
-import { View, Text } from 'react-native'
+import { ScrollView } from 'react-native'
 import React from 'react'
+import StarCard from '../components/StarCard'
 
-const FollowedStarScreen = () => {
+const FollowedStarScreen = ({navigation}) => {
   return (
-    <View>
-      <Text>FollowedStarScreen</Text>
-    </View>
+    <ScrollView>
+      <StarCard
+        starname="star1"
+        img=""
+        onPress={() => navigation.navigate('StarDetail',  {star: "star1"})}
+      />
+    </ScrollView>
   )
 }
 

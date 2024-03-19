@@ -17,6 +17,7 @@ import FollowedStarScreen from '../screens/FollowedStarScreen';
 import PersonalPostScreen from '../screens/PersonalPostScreen';
 import AddPostScreen from '../screens/AddPostScreen';
 import AchievementStarScreen from '../screens/AchievementStarScreen';
+import StarScreen from '../screens/StarScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -90,6 +91,14 @@ const ProfileStack = () => {
             },
           }}
       />
+      <Stack.Screen 
+          name="StarDetail"
+          component={StarScreen}
+          options={{
+            headerTitle: "",
+            headerTransparent: true
+          }}
+      />
   </Stack.Navigator>
   );
 };
@@ -149,6 +158,33 @@ const AchievementStack = () => {
   );
 };
 
+const ExploreStack = () => {
+  return(
+  <Stack.Navigator initialRouteName='ExploreAll'>
+      <Stack.Screen 
+          name="ExploreAll"
+          component={ExploreScreen}
+          options={{
+            headerTitle: "Explore",
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: Colors.background,
+              elevation: 0,
+            },
+          }}
+      />
+      <Stack.Screen 
+          name="StarDetail"
+          component={StarScreen}
+          options={{
+            headerTitle: "",
+            headerTransparent: true
+          }}
+      />
+  </Stack.Navigator>
+  );
+};
+
 const BottomTabBar = () => {
   return (
     <Tab.Navigator screenOptions={() => ({
@@ -177,15 +213,16 @@ const BottomTabBar = () => {
       <Tab.Screen 
         key = {2}
         name={'Explore'}
-        component={ExploreScreen}
+        component={ExploreStack}
         options={{
-            tabBarIcon: ({color, focused}) => (
-                <Ionicons
-                name={focused? 'search': 'search-outline'}
-                size={25}
-                color={color}
-                />
-            ),
+          unmountOnBlur: true,
+          tabBarIcon: ({color, focused}) => (
+              <Ionicons
+              name={focused? 'search': 'search-outline'}
+              size={25}
+              color={color}
+              />
+          ),
         }}
       />
       <Tab.Screen 
@@ -208,6 +245,7 @@ const BottomTabBar = () => {
         name={'Achievement'}
         component={AchievementStack}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({color, focused}) => (
               <Ionicons
               name={focused? 'trophy': 'trophy-outline'}

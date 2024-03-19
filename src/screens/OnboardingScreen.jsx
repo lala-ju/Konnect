@@ -62,7 +62,7 @@ const OnboardingScreen = ({navigation}) => {
         onDone={() => navigation.navigate("Login")}
         pages={[
           {
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.lightgrey,
             image: <Image source={Onboarding1} />,
             title: 'Connect to the World',
             subtitle: 'A New Way To Connect With The World',
@@ -74,7 +74,7 @@ const OnboardingScreen = ({navigation}) => {
             subtitle: 'Share Your Thoughts With Similar Kind of People',
           },
           {
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.lightgrey,
             image: <Image source={Onboarding3} />,
             title: 'Become The Star',
             subtitle: "Let The Spot Light Capture You",

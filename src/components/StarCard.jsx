@@ -1,36 +1,30 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { Colors } from '../utils/Colors'
-import {windowHeight, windowWidth} from '../utils/Dimension';
+import {windowHeight} from '../utils/Dimension';
 import DefaultProfileImage from '../assets/images/defaultProfile.png'
 
-const AchievementCard = ({
+const StarCard = ({
     starname, 
-    days,
     img,
     ...rest
 }) => {
-  return (
-    <TouchableOpacity style={styles.card}{...rest}>
-        <View style={styles.rowContainer}>
-            <Image
-            style = {styles.starImg}
-            source = {{uri: Image.resolveAssetSource(DefaultProfileImage).uri}}
-            />
-            <View style = {styles.subcontainer}>
+    return (
+        <TouchableOpacity style={styles.card}{...rest}>
+            <View style={styles.rowContainer}>
+                <Image
+                style = {styles.starImg}
+                source = {{uri: Image.resolveAssetSource(DefaultProfileImage).uri}}
+                />
                 <Text style={styles.starTitle}>
                     {starname}
                 </Text>
-                <Text style={styles.followedDays}>
-                    Followed {days} Days
-                </Text>
             </View>
-        </View>
-    </TouchableOpacity>
-  )
+        </TouchableOpacity>
+      )
 };
 
-export default AchievementCard
+export default StarCard;
 
 const styles = StyleSheet.create({
     card:{
@@ -51,18 +45,10 @@ const styles = StyleSheet.create({
         borderColor: Colors.darkgrey,
         borderRadius: 75,
     },
-    subcontainer:{
-        marginLeft: windowWidth/15,
-        alignItems: 'flex-start',
-        flexDirection: 'column',
-    },
     starTitle:{
         fontSize: 20,
         fontWeight: 'bold',
         color: Colors.black,
-    },
-    followedDays:{
-        fontSize: 16,
-        color: Colors.darkgrey,
+        marginLeft: 20,
     },
 })
