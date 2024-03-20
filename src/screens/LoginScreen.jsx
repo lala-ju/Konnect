@@ -1,12 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
@@ -20,6 +13,7 @@ const LoginScreen = ({navigation}) => {
   const {googleLogin} = useContext(AuthContext);
 
   return (
+    <SafeAreaView style={styles.safe}>
     <View style={styles.container}>
       <Image
         source={require('../assets/images/Logo.png')}
@@ -78,12 +72,16 @@ const LoginScreen = ({navigation}) => {
         </Text>
       </TouchableOpacity> */}
     </View>
+    </SafeAreaView>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  safe:{
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

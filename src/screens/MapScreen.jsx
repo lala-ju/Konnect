@@ -54,7 +54,7 @@ const MapScreen = ({navigation}) => {
   }, [])
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
         {
           location && (
@@ -88,6 +88,9 @@ const MapScreen = ({navigation}) => {
 export default MapScreen;
 
 const styles = StyleSheet.create({
+  safe:{
+    flex: 1,
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Alert, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Alert, ScrollView, SafeAreaView } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import GeneralButton from '../components/GeneralButton'
 import { Colors } from '../utils/Colors'
@@ -81,6 +81,7 @@ const AddPostScreen = ({navigation, route}) => {
     })
 
     return (
+    <SafeAreaView style={styles.safe}>
     <ScrollView>
     <View style={styles.container}>
         <TextInput 
@@ -140,12 +141,16 @@ const AddPostScreen = ({navigation, route}) => {
         />
     </View>
     </ScrollView>
+    </SafeAreaView>
   )
 }
 
 export default AddPostScreen
 
 const styles = StyleSheet.create({
+    safe: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         alignItems: 'left',

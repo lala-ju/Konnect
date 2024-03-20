@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Alert } from 'react-native'
+import { View, Text, StyleSheet, Image, Alert, SafeAreaView } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import FormInput from '../components/FormInput';
 import GeneralButton from '../components/GeneralButton';
@@ -43,6 +43,7 @@ const EditProfileScreen = ({navigation}) => {
   }, [navigation, loading]);
 
   return (
+    <SafeAreaView style={styles.safe}>
     <View style = {styles.container}>
         <Image
           style = {styles.userImg}
@@ -70,10 +71,14 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
     </View>
+    </SafeAreaView>
   ); 
 }
 
 const styles = StyleSheet.create({
+  safe:{
+    flex: 1,
+  },
   container:{
     flex: 1,
     justifyContent: 'center',

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, SafeAreaView } from 'react-native';
 import React from 'react';
 import { windowHeight } from '../utils/Dimension';
 import DefaultProfileImage from '../assets/images/defaultProfile.png'
@@ -8,6 +8,7 @@ const StarScreen = ({navigation, route}) => {
     const starid = route.params.star;
 
     return (
+        <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
            <Image
                 style = {styles.starImg}
@@ -17,12 +18,16 @@ const StarScreen = ({navigation, route}) => {
                 {starid}
             </Text>
         </View>
+        </SafeAreaView>
     )
 };
 
 export default StarScreen;
 
 const styles = StyleSheet.create({
+    safe:{
+        flex: 1,
+    },
     container:{
         marginTop: windowHeight/15,
         justifyContent: 'center',

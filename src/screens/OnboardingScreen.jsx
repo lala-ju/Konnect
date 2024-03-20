@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 
 import Onboarding from 'react-native-onboarding-swiper';
 import { Colors } from '../utils/Colors';
@@ -53,6 +53,7 @@ const Done = ({...props}) => (
 
 const OnboardingScreen = ({navigation}) => {
     return (
+        <SafeAreaView style={styles.safe}>
         <Onboarding
         SkipButtonComponent={Skip}
         NextButtonComponent={Next}
@@ -81,15 +82,19 @@ const OnboardingScreen = ({navigation}) => {
           },
         ]}
       />
+      </SafeAreaView>
     );
 };
 
 export default OnboardingScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center'
-  },
+    safe:{
+        flex: 1,
+      },
+    container: {
+        flex: 1, 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    },
 });

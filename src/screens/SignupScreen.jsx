@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, Text, TouchableOpacity, Platform, StyleSheet, Alert} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Alert, SafeAreaView} from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
@@ -15,6 +15,7 @@ const SignupScreen = ({navigation}) => {
   const {register} = useContext(AuthContext);
 
   return (
+    <SafeAreaView style={styles.safe}>
     <View style={styles.container}>
       <Text style={styles.text}>Create an account</Text>
 
@@ -84,12 +85,16 @@ const SignupScreen = ({navigation}) => {
         <Text style={styles.navButtonText}>Have an account? Sign In</Text>
       </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 };
 
 export default SignupScreen;
 
 const styles = StyleSheet.create({
+  safe:{
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

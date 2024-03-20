@@ -26,6 +26,7 @@ const AccountScreen = ({navigation}) => {
   }, [navigation, loading]);
 
   return (
+    <SafeAreaView style={styles.safe}>
     <View style = {styles.container}>
         <Image
           style = {styles.userImg}
@@ -91,10 +92,14 @@ const AccountScreen = ({navigation}) => {
           />
         </View>
     </View>
+    </SafeAreaView>
   ); 
 };
 
 const styles = StyleSheet.create({
+  safe:{
+    flex: 1,
+  },
   container:{
     flex: 1,
     justifyContent: 'center',
