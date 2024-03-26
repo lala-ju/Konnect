@@ -29,7 +29,12 @@ const ProfileStack = () => {
         name="Account"
         component={AccountScreen}
         options={{
-          headerShown: false,
+          headerTitle: "Profile",
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: Colors.background,
+            elevation: 0,
+          },
         }}
       />
       <Stack.Screen
@@ -110,7 +115,12 @@ const MapStack = () => {
         name="MapPin"
         component={MapScreen}
         options={{
-          headerShown: false,
+          headerTitle: "Map",
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: Colors.background,
+            elevation: 0,
+          },
         }}
       />
       <Stack.Screen
@@ -185,6 +195,25 @@ const ExploreStack = () => {
   );
 };
 
+const HomeStack = () => {
+  return (
+    <Stack.Navigator initialRouteName='HomeAll'>
+      <Stack.Screen
+        name="HomeAll"
+        component={HomeScreen}
+        options={{
+          headerTitle: "Home",
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: Colors.background,
+            elevation: 0,
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const BottomTabBar = () => {
   return (
     <Tab.Navigator screenOptions={() => ({
@@ -199,7 +228,7 @@ const BottomTabBar = () => {
       <Tab.Screen
         key={1}
         name={'Home'}
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
