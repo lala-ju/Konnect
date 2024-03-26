@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
-import {windowHeight, windowWidth} from '../utils/Dimension';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { windowHeight, windowWidth } from '../utils/Dimension';
 
 const GeneralButton = ({
   buttonTitle,
@@ -12,10 +12,10 @@ const GeneralButton = ({
   let bgColor = backgroundColor;
   return (
     <TouchableOpacity
-      style={[styles.buttonContainer, {backgroundColor: bgColor}]}
+      style={[styles.buttonContainer, { backgroundColor: bgColor }]}
       {...rest}>
-      <View style={[styles.btnTxtWrapper, {alignItems: aligned}]}>
-        <Text style={[styles.buttonText, {color: color}]}>{buttonTitle}</Text>
+      <View style={[styles.btnTxtWrapper, { alignItems: aligned }]}>
+        <Text style={[styles.buttonText, { color: color }]}>{buttonTitle}</Text>
       </View>
     </TouchableOpacity>
   );
