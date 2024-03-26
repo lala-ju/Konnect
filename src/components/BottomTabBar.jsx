@@ -204,7 +204,7 @@ const BottomTabBar = () => {
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'star' : 'star-outline'}
-              size={25}
+              size={30}
               color={color}
             />
           ),
@@ -219,7 +219,7 @@ const BottomTabBar = () => {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? 'search' : 'search-outline'}
-              size={25}
+              size={30}
               color={color}
             />
           ),
@@ -234,7 +234,7 @@ const BottomTabBar = () => {
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'map-marker' : 'map-marker-outline'}
-              size={28}
+              size={30}
               color={color}
             />
           ),
@@ -249,7 +249,7 @@ const BottomTabBar = () => {
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? 'trophy' : 'trophy-outline'}
-              size={25}
+              size={30}
               color={color}
             />
           ),
@@ -264,7 +264,7 @@ const BottomTabBar = () => {
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'account' : 'account-outline'}
-              size={25}
+              size={30}
               color={color}
             />
           ),
