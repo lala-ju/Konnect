@@ -34,6 +34,7 @@ const EditProfileScreen = ({navigation}) => {
         'Profile Updated!',
         'Your profile has been updated successfully.'
       );
+      navigation.goBack();
     })
   }
 
@@ -67,6 +68,7 @@ const EditProfileScreen = ({navigation}) => {
             color={Colors.white}
             backgroundColor={Colors.primaryColor}
             aligned='center'
+            width='100%'
             onPress={() => updateProfile()}
           />
         </View>

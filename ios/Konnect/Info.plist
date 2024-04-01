@@ -43,7 +43,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>YOUR TEXT</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -65,6 +65,7 @@
 		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
+		<string>NotoSansTC-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -87,7 +88,5 @@
 		<key>YOUR-PURPOSE-KEY</key>
 		<string>YOUR TEXT</string>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>YOUR TEXT</string>
 </dict>
 </plist>

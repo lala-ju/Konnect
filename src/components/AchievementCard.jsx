@@ -55,11 +55,13 @@ const styles = StyleSheet.create({
         marginLeft: windowWidth/15,
         alignItems: 'flex-start',
         flexDirection: 'column',
+        justifyContent: 'center',
     },
     starTitle:{
         fontSize: 20,
         fontWeight: 'bold',
         color: Colors.black,
+        marginBottom: 5,
     },
     followedDays:{
         fontSize: 16,

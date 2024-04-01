@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         borderRadius: 75,
     },
     starTitle:{
+        fontFamily: 'NotoSansTC-Regular',  
         fontSize: 20,
         fontWeight: 'bold',
         color: Colors.black,

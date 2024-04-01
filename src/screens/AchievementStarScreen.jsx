@@ -2,10 +2,11 @@ import { View, Text, StyleSheet, Image, SafeAreaView } from 'react-native'
 import React from 'react'
 import { windowHeight } from '../utils/Dimension';
 import DefaultProfileImage from '../assets/images/defaultProfile.png'
-
+import { Colors } from '../utils/Colors';
+import NumItemBox from '../components/NumItemBox';
 
 const AchievementStarScreen = ({navigation, route}) => {
-    const starid = route.params.star;
+    const {name, official, personal, days} = route.params;
     return (
         <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
@@ -14,8 +15,24 @@ const AchievementStarScreen = ({navigation, route}) => {
                 source = {{uri: Image.resolveAssetSource(DefaultProfileImage).uri}}
             />
             <Text style={styles.starname}>
-                {starid}
+                {name}
             </Text>
+            <Text style={styles.info}>
+                You have followed
+            </Text>
+            <Text style={styles.important}>
+                {days} Days
+            </Text>
+            <View style={styles.rowContainer}>
+                <NumItemBox 
+                    num = {official}
+                    itemName="Official Spots"
+                />
+                <NumItemBox 
+                    num = {personal}
+                    itemName="Personal Spots"
+                />
+            </View>
         </View>
         </SafeAreaView>
     )
@@ -38,9 +55,27 @@ const styles = StyleSheet.create({
         borderRadius: 75,
     },
     starname:{
+        fontFamily: 'NotoSansTC-Regular',  
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 10,
         marginBottom: 10,
+        color: Colors.black,
+    },
+    info:{
+        fontFamily: 'NotoSansTC-Regular', 
+        fontSize: 16, 
+        color: Colors.black,
+    },
+    important:{
+        fontFamily: 'NotoSansTC-Regular', 
+        fontSize: 18,
+        fontWeight: 'bold', 
+        color: Colors.black,
+        marginBottom: 5,
+    },
+    rowContainer:{
+        flexDirection: 'row',
+        alignItems: 'center',
     },
 });

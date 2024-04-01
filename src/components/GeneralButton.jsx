@@ -7,12 +7,14 @@ const GeneralButton = ({
   color,
   backgroundColor,
   aligned,
+  width,
   ...rest
 }) => {
   let bgColor = backgroundColor;
+  let percent = width;
   return (
     <TouchableOpacity
-      style={[styles.buttonContainer, { backgroundColor: bgColor }]}
+      style={[styles.buttonContainer, { backgroundColor: bgColor , width: percent}]}
       {...rest}>
       <View style={[styles.btnTxtWrapper, { alignItems: aligned }]}>
         <Text style={[styles.buttonText, { color: color }]}>{buttonTitle}</Text>
@@ -26,11 +28,10 @@ export default GeneralButton;
 const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 10,
-    width: '100%',
     height: windowHeight / 15,
     padding: 10,
     flexDirection: 'row',
-    borderRadius: 3,
+    borderRadius: 10,
   },
   btnTxtWrapper: {
     flex: 1,

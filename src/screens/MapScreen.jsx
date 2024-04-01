@@ -4,6 +4,7 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import { PERMISSIONS, RESULTS, check, request } from 'react-native-permissions';
 import Geolocation from "react-native-geolocation-service"
 import { Colors } from '../utils/Colors';
+import GeneralButton from '../components/GeneralButton';
 
 const MapScreen = ({navigation}) => { 
   const [location, setLocation] = useState(null)
@@ -50,7 +51,7 @@ const MapScreen = ({navigation}) => {
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     );
-    console.log(location)
+    //console.log(location)
   }, [])
 
   return (
@@ -72,9 +73,12 @@ const MapScreen = ({navigation}) => {
           )
         }
         <View style={styles.buttonContainer}>
-        <Button
-          title="Add Post"
-          color={Colors.primaryColor}
+        <GeneralButton
+          buttonTitle="Add Post"
+          color={Colors.white}
+          backgroundColor={Colors.primaryColor}
+          aligned='center'
+          width='25%'
           onPress={() => {
             navigation.navigate('AddPost', {location: location});
           }}
@@ -99,8 +103,8 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   buttonContainer:{
-    position: 'absolute',
-    top: '95%',
+    top: '90%',
     alignSelf: 'flex-end',
+    marginRight: 5,
   },
 });
