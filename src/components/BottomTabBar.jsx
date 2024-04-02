@@ -85,7 +85,7 @@ const ProfileStack = () => {
         name="Posts"
         component={PersonalPostScreen}
         options={{
-          headerTitle: 'All Posts',
+          headerTitle: 'All Pins',
           headerBackTitleVisible: true,
           headerBackTitle: 'back',
           headerTitleAlign: 'center',

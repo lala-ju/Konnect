@@ -54,7 +54,7 @@ const AchievementScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.safe}>
-    {ids.length === 0 ? (
+    {likes.length === 0 ? (
       <View style={styles.load}>
         <Text style={styles.notice}>
           Explore some stars to view achievements !

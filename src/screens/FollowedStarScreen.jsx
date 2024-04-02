@@ -7,7 +7,7 @@ import { Colors } from '../utils/Colors'
 
 const FollowedStarScreen = ({ navigation, route }) => {
   const user = route.params.uid;
-  var ids = []
+  const [ids, setIds] = useState(route.params.liked.map(({ id }) => id));
   const [stars, setStars] = useState([]);
   const [back, setBack] = useState(true);
   const [starnum, setStarNum] = useState(0);
@@ -21,7 +21,7 @@ const FollowedStarScreen = ({ navigation, route }) => {
         .get()
         .then(doc => {
           const { likedStars } = doc.data();
-          ids = likedStars.map(({ id }) => id);
+          setIds(likedStars.map(({ id }) => id));
         });
 
       if (loading) {
@@ -42,13 +42,14 @@ const FollowedStarScreen = ({ navigation, route }) => {
           // console.log('Total stars: ', querySnapshot.size);
           querySnapshot.forEach(documentSnapshot => {
             if (ids.includes(documentSnapshot.id)) {
-              const { name, pins, followers, info } = documentSnapshot.data();
+              const { name, pins, followers, info, img } = documentSnapshot.data();
               list.push({
                 id: documentSnapshot.id,
                 name,
                 pins,
                 followers,
                 info,
+                img,
               })
             }
           });
@@ -99,7 +100,7 @@ const FollowedStarScreen = ({ navigation, route }) => {
             renderItem={({ item }) => (
               <StarCard
                 starname={item.name}
-                img=""
+                img={item.img}
                 onPress={() =>
                   navigation.navigate(
                     'StarDetail',
@@ -109,6 +110,7 @@ const FollowedStarScreen = ({ navigation, route }) => {
                       info: item.info,
                       pins: item.pins,
                       followers: item.followers,
+                      img: item.img,
                     }
                   )
                 }

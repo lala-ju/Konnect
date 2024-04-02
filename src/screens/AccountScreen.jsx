@@ -60,19 +60,19 @@ const AccountScreen = ({navigation}) => {
               aligned='left'
               width='100%'
               onPress={() => {
-                navigation.navigate('Followed', {uid: user.uid});
+                navigation.navigate('Followed', {uid: user.uid, liked: userData.likedStars});
               }}
             />
           </View>
           <View>
             <GeneralButton
-              buttonTitle="Your Posts"
+              buttonTitle="Your Pins"
               color={Colors.black}
               backgroundColor={Colors.background}
               aligned='left'
               width='100%'
               onPress={() => {
-                navigation.navigate('Posts');
+                navigation.navigate('Posts', {uid: user.uid});
               }}
             />
           </View>
@@ -84,7 +84,7 @@ const AccountScreen = ({navigation}) => {
               aligned='center'
               width='100%'
               onPress={() => {
-                navigation.navigate('EditProfile');
+                navigation.navigate('EditProfile', {data: userData});
               }}
             />
           </View>

@@ -14,6 +14,7 @@ const StarScreen = ({navigation, route}) => {
     const name = route.params.name;
     const info = route.params.info;
     const pins = route.params.pins;
+    const img = route.params.img;
     const [followers, setFollowers] = useState(route.params.followers);
     const [follow, setFollow] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -127,7 +128,7 @@ const StarScreen = ({navigation, route}) => {
                     <View style={styles.container}>
                     <Image
                             style = {styles.starImg}
-                            source = {{uri: Image.resolveAssetSource(DefaultProfileImage).uri}}
+                            source = {{uri: img? img : Image.resolveAssetSource(DefaultProfileImage).uri}}
                         />
                         <Text style={styles.starname}>
                             {name}

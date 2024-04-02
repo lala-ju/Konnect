@@ -14,7 +14,7 @@ const StarCard = ({
             <View style={styles.rowContainer}>
                 <Image
                 style = {styles.starImg}
-                source = {{uri: Image.resolveAssetSource(DefaultProfileImage).uri}}
+                source = {{uri: img? img: Image.resolveAssetSource(DefaultProfileImage).uri}}
                 />
                 <Text style={styles.starTitle}>
                     {starname}
