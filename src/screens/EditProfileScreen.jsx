@@ -117,6 +117,9 @@ const EditProfileScreen = ({navigation, route}) => {
             style = {styles.userImg}
             source = {{uri: image? image : Image.resolveAssetSource(DefaultProfileImage).uri}}
           />
+          <Text style={styles.edit}>
+            Edit Profile Picture
+          </Text>
         </TouchableOpacity>
         <Modal
           animationType="none"
@@ -212,7 +215,9 @@ const styles = StyleSheet.create({
     height: windowWidth / 2,
     width: windowWidth / 2,
     borderRadius: 100,
-    margin: 10,
+    marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
   },
   imgContainer:{
     alignItems: 'center',
@@ -233,11 +238,15 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
-      fontFamily: 'NotoSansTC-Regular',  
-      fontSize: 16,
-      marginBottom: 2,
-      textAlign: 'center',
+    fontFamily: 'NotoSansTC-Regular',  
+    fontSize: 16,
+    marginBottom: 2,
+    textAlign: 'center',
   },
+  edit:{
+    fontFamily: 'NotoSansTC-Regular',  
+    fontSize: 16,
+  }
 });
 
 export default EditProfileScreen;

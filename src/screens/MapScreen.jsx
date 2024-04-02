@@ -9,7 +9,6 @@ import firestore from '@react-native-firebase/firestore';
 import { AuthContext } from '../navigation/AuthProvider';
 import { Dropdown } from 'react-native-element-dropdown';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SharedTransitionType } from 'react-native-reanimated';
 
 const MapScreen = ({navigation}) => { 
   const { user } = useContext(AuthContext);
@@ -103,6 +102,9 @@ const MapScreen = ({navigation}) => {
       })
       //console.log(list);
       setMarkers(list);
+      if(loading){
+        setLoading(false);
+      }
     } catch(e){
       console.log(e)
     }
@@ -120,6 +122,10 @@ const MapScreen = ({navigation}) => {
     fetchlikedStar();
     navigation.addListener("focus", () => setBack(!back));
   }, [back])
+
+  useEffect(() => {
+    renderMarker();
+  }, [selectedStar])
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -178,7 +184,7 @@ const MapScreen = ({navigation}) => {
           />
           <View style={styles.buttonContainer}>
           <GeneralButton
-            buttonTitle="Add Post"
+            buttonTitle="Add Pin"
             color={Colors.white}
             backgroundColor={Colors.primaryColor}
             aligned='center'
