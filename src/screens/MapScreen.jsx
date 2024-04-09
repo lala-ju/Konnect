@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { PERMISSIONS, RESULTS, check, request } from 'react-native-permissions';
 import Geolocation from "react-native-geolocation-service"
 import { Colors } from '../utils/Colors';
@@ -10,7 +10,7 @@ import { AuthContext } from '../navigation/AuthProvider';
 import { Dropdown } from 'react-native-element-dropdown';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const MapScreen = ({navigation}) => { 
+const MapScreen = ({ navigation }) => {
   const { user } = useContext(AuthContext);
   const [datas, setData] = useState([]);
   const [location, setLocation] = useState(null);
@@ -22,30 +22,30 @@ const MapScreen = ({navigation}) => {
   const fetchlikedStar = async () => {
     try {
       await firestore()
-      .collection('users')
-      .doc(user.uid)
-      .get()
-      .then(doc => {
-          let temp = [{name: "全部"}, {name: "個人"}];
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then(doc => {
+          let temp = [{ name: "全部" }, { name: "個人" }];
           const { likedStars } = doc.data();
           setData(temp.concat(likedStars));
-      });
+        });
 
-      if(loading){
+      if (loading) {
         setLoading(false);
       }
-      
-    } catch(e){
+
+    } catch (e) {
       console.log(e)
     }
   }
-  
-  const handleLocationPermission = async () => { 
+
+  const handleLocationPermission = async () => {
     let permissionCheck = '';
     if (Platform.OS === 'ios') {
       permissionCheck = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
 
-      if (permissionCheck === RESULTS.BLOCKED || permissionCheck === RESULTS.DENIED){
+      if (permissionCheck === RESULTS.BLOCKED || permissionCheck === RESULTS.DENIED) {
         const permissionRequest = await request(
           PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
         );
@@ -53,10 +53,10 @@ const MapScreen = ({navigation}) => {
           ? console.warn('Location permission granted.')
           : console.warn('location permission denied.');
       }
-    }else if (Platform.OS === 'android') {
+    } else if (Platform.OS === 'android') {
       permissionCheck = await check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
 
-      if (permissionCheck === RESULTS.BLOCKED || permissionCheck === RESULTS.DENIED){
+      if (permissionCheck === RESULTS.BLOCKED || permissionCheck === RESULTS.DENIED) {
         const permissionRequest = await request(
           PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
         );
@@ -67,7 +67,7 @@ const MapScreen = ({navigation}) => {
     }
   };
 
-  const curPos = async() => {
+  const curPos = async () => {
     Geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords
@@ -80,32 +80,32 @@ const MapScreen = ({navigation}) => {
     );
   }
 
-  const renderMarker = async() => {
+  const renderMarker = async () => {
     const list = [];
-    try{
+    try {
       await firestore().collection('pins')
-      .where('userID', '==', user.uid)
-      .get()
-      .then((query) => {
-        query.forEach((doc) => {
-          const{caption, star, postTime, location} = doc.data();
-          if(selectedStar === '全部' || star === selectedStar){
-            list.push({
-              id: doc.id,
-              postTime, 
-              caption,
-              latlng: location,
-              star,
-            })
-          }
+        .where('userID', '==', user.uid)
+        .get()
+        .then((query) => {
+          query.forEach((doc) => {
+            const { caption, star, postTime, location } = doc.data();
+            if (selectedStar === '全部' || star === selectedStar) {
+              list.push({
+                id: doc.id,
+                postTime,
+                caption,
+                latlng: location,
+                star,
+              })
+            }
+          })
         })
-      })
       //console.log(list);
       setMarkers(list);
-      if(loading){
+      if (loading) {
         setLoading(false);
       }
-    } catch(e){
+    } catch (e) {
       console.log(e)
     }
   }
@@ -129,37 +129,37 @@ const MapScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.safe}>
-      {loading? (
+      {loading ? (
         <View style={styles.load}>
           <ActivityIndicator size="large" />
         </View>
-      ):(
+      ) : (
         <View style={styles.container}>
           {
             location && (
               <MapView
-              style={styles.mapStyle}
-              initialRegion={{
-                latitude: location.latitude,
-                longitude: location.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-              showsMyLocationButton={true}
-              showsUserLocation={true}
+                style={styles.mapStyle}
+                initialRegion={{
+                  latitude: location.latitude,
+                  longitude: location.longitude,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}
+                showsMyLocationButton={true}
+                showsUserLocation={true}
               >
-              {
-                markers && (markers.map(marker => (
-                  <Marker 
-                    key={marker.id}
-                    coordinate={marker.latlng}
-                    pinColor={Colors.green}
-                    title={marker.star}
-                    description={marker.caption}
-                    showCallout
-                  />
-                )))
-              }
+                {
+                  markers && (markers.map(marker => (
+                    <Marker
+                      key={marker.id}
+                      coordinate={marker.latlng}
+                      pinColor={Colors.green}
+                      title={marker.star}
+                      description={marker.caption}
+                      showCallout
+                    />
+                  )))
+                }
               </MapView>
             )
           }
@@ -176,29 +176,29 @@ const MapScreen = ({navigation}) => {
             fontFamily='NotoSansTC-Regular'
             value={selectedStar}
             onChange={item => {
-                setSelected(item.name);
+              setSelected(item.name);
             }}
             renderLeftIcon={() => (
-                <MaterialCommunityIcons style={styles.icon} color={Colors.black} name="star" size={25} />
+              <MaterialCommunityIcons style={styles.icon} color={Colors.black} name="star" size={25} />
             )}
           />
           <View style={styles.buttonContainer}>
-          <GeneralButton
-            buttonTitle="Add Pin"
-            color={Colors.white}
-            backgroundColor={Colors.primaryColor}
-            aligned='center'
-            width='25%'
-            onPress={() => {
-              navigation.navigate(
-                'AddPost', 
-                {
-                  location: location,
-                  liked: datas.slice(1),
-                }
-              );
-            }}
-          />
+            <GeneralButton
+              buttonTitle="Add Pin"
+              color={Colors.white}
+              backgroundColor={Colors.primaryColor}
+              aligned='center'
+              width='25%'
+              onPress={() => {
+                navigation.navigate(
+                  'AddPost',
+                  {
+                    location: location,
+                    liked: datas.slice(1),
+                  }
+                );
+              }}
+            />
           </View>
         </View>
       )}
@@ -209,10 +209,10 @@ const MapScreen = ({navigation}) => {
 export default MapScreen;
 
 const styles = StyleSheet.create({
-  safe:{
+  safe: {
     flex: 1,
   },
-  load:{
+  load: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -225,8 +225,8 @@ const styles = StyleSheet.create({
   mapStyle: {
     ...StyleSheet.absoluteFillObject,
   },
-  buttonContainer:{
-    bottom: -610,
+  buttonContainer: {
+    bottom: Platform.OS === 'android' ? -610 : -550,
     alignSelf: 'flex-end',
     marginRight: 5,
   },

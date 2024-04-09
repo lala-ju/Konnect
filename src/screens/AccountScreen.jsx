@@ -6,25 +6,25 @@ import GeneralButton from '../components/GeneralButton';
 import DefaultProfileImage from '../assets/images/defaultProfile.png'
 import firestore from '@react-native-firebase/firestore';
 
-const AccountScreen = ({navigation}) => {
-  const {user, logout} = useContext(AuthContext);
+const AccountScreen = ({ navigation }) => {
+  const { user, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [back, setBack] = useState(true);
 
-  const getUser = async() => {
-    try{
+  const getUser = async () => {
+    try {
       await firestore().collection('users').doc(user.uid).get()
-      .then((documentSnapshot) => {
-        if(documentSnapshot.exists){
-          setUserData(documentSnapshot.data());
-        }
-      });
-      
-      if(loading){
+        .then((documentSnapshot) => {
+          if (documentSnapshot.exists) {
+            setUserData(documentSnapshot.data());
+          }
+        });
+
+      if (loading) {
         setLoading(false);
       }
-    }catch(e) {
+    } catch (e) {
       console.log(e);
     }
   }
@@ -36,18 +36,18 @@ const AccountScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.safe}>
-    {loading? (
-      <View style={styles.load}>
+      {loading ? (
+        <View style={styles.load}>
           <ActivityIndicator size="large" />
-      </View>
-    ):(
-      <View style = {styles.container}>
+        </View>
+      ) : (
+        <View style={styles.container}>
           <Image
-            style = {styles.userImg}
-            source = {{uri: userData? userData.userImg || Image.resolveAssetSource(DefaultProfileImage).uri : Image.resolveAssetSource(DefaultProfileImage).uri}}
+            style={styles.userImg}
+            source={{ uri: userData ? userData.userImg || Image.resolveAssetSource(DefaultProfileImage).uri : Image.resolveAssetSource(DefaultProfileImage).uri }}
           />
           <Text style={styles.userName}>
-            {userData ? userData.username || user.uid : user.uid} 
+            {userData ? userData.username || user.uid : user.uid}
           </Text>
           <Text style={styles.bio}>
             {userData ? userData.bio || 'bio' : 'bio'}
@@ -55,24 +55,24 @@ const AccountScreen = ({navigation}) => {
           <View>
             <GeneralButton
               buttonTitle="Followed Stars"
-              color={Colors.black}
-              backgroundColor={Colors.background}
-              aligned='left'
+              color={Colors.darkgrey}
+              backgroundColor={Colors.lightgrey}
+              aligned='center'
               width='100%'
               onPress={() => {
-                navigation.navigate('Followed', {uid: user.uid, liked: userData.likedStars});
+                navigation.navigate('Followed', { uid: user.uid, liked: userData.likedStars });
               }}
             />
           </View>
           <View>
             <GeneralButton
               buttonTitle="Your Pins"
-              color={Colors.black}
-              backgroundColor={Colors.background}
-              aligned='left'
+              color={Colors.darkgrey}
+              backgroundColor={Colors.lightgrey}
+              aligned='center'
               width='100%'
               onPress={() => {
-                navigation.navigate('Posts', {uid: user.uid});
+                navigation.navigate('Posts', { uid: user.uid });
               }}
             />
           </View>
@@ -84,7 +84,7 @@ const AccountScreen = ({navigation}) => {
               aligned='center'
               width='100%'
               onPress={() => {
-                navigation.navigate('EditProfile', {data: userData});
+                navigation.navigate('EditProfile', { data: userData });
               }}
             />
           </View>
@@ -109,38 +109,38 @@ const AccountScreen = ({navigation}) => {
               width='100%'
               onPress={() => {
                 Alert.alert('Logout', 'You have to login again later', [
-                {
+                  {
                     text: 'Cancel',
-                    onPress: () => {},
+                    onPress: () => { },
                     style: 'cancel',
-                },
-                {
-                    text: 'OK', 
+                  },
+                  {
+                    text: 'OK',
                     onPress: () => {
                       logout()
                     },
-                },
+                  },
                 ]);
               }}
             />
           </View>
-      </View>
-    )}
+        </View>
+      )}
     </SafeAreaView>
-  ); 
+  );
 };
 
 const styles = StyleSheet.create({
-  safe:{
+  safe: {
     flex: 1,
   },
-  load:{
+  load: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
-  container:{
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
