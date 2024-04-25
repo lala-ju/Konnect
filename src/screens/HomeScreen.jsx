@@ -32,14 +32,18 @@ const HomeScreen = ({ navigation }) => {
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(documentSnapshot => {
-            const { star, starImg, info, img } = documentSnapshot.data();
+            const { star, starImg, title, postTime, info, playTime, img, place } = documentSnapshot.data();
             if (liked.includes(star)) {
               list.push({
                 id: documentSnapshot.id,
                 star,
                 starImg,
+                title,
+                postTime,
                 info,
-                img
+                playTime,
+                img,
+                place
               })
             }
           });
@@ -56,9 +60,11 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     fetchlikedStar();
+  }, [navigation])
+
+  useEffect(() => {
     fetchNews();
-    navigation.addListener("focus", () => setLoading(!loading));
-  }, [loading])
+  }, [liked])
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -74,8 +80,23 @@ const HomeScreen = ({ navigation }) => {
               <NewsCard
                 star={item.star}
                 starImg={item.starImg}
-                info={item.info}
+                postTime={item.postTime}
+                playTime={item.playTime}
+                title={item.title}
                 img={item.img}
+                onPress={() => navigation.navigate(
+                  'info', 
+                  {
+                    star: item.star,
+                    starImg: item.starImg,
+                    postTime: item.postTime,
+                    playTime: item.playTime,
+                    title: item.title,
+                    info: item.info,
+                    img: item.img,
+                    place: item.place
+                  }
+                )}
               />
             )}
             keyExtractor={item => item.id}

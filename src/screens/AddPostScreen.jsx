@@ -15,6 +15,7 @@ import { windowHeight, windowWidth } from '../utils/Dimension';
 Geocoder.init(GOOGLE_MAPS_API_KEY, { language: 'en' });
 
 const AddPostScreen = ({ navigation, route }) => {
+    const type = route.params.type;
     const [datas, setDatas] = useState(route.params.liked);
     const { user } = useContext(AuthContext);
     const location = route.params.location;
@@ -47,11 +48,11 @@ const AddPostScreen = ({ navigation, route }) => {
           height: windowHeight / 3,
           cropping: true,
         }).then((image) => {
-          console.log(image);
+          //console.log(image);
           const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
           setImage(imageUri);
         });
-        console.log(image);
+        //console.log(image);
     };
 
     const takePhotoFromCamera = () => {
@@ -60,7 +61,7 @@ const AddPostScreen = ({ navigation, route }) => {
             height: windowHeight / 3,
           cropping: true,
         }).then((image) => {
-          console.log(image);
+          //console.log(image);
           const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
           setImage(imageUri);
         });
@@ -98,16 +99,20 @@ const AddPostScreen = ({ navigation, route }) => {
             console.log(error);
         });
         //add increment to selected stars info
-        console.log(datas);
+        //console.log(datas);
         var renewData = datas
         if(selectedStar !== '個人'){
             for (var info of renewData) {
                 if(info.name === selectedStar){
-                    info.personal += 1
+                    if(type === 'official'){
+                        info.official += 1;
+                    }else{
+                        info.personal += 1;
+                    }
                 }
             }
         }
-        console.log(renewData);
+        //console.log(renewData);
         await firestore().collection('users').doc(user.uid)
         .update({
             likedStars: renewData.slice(1),
@@ -136,7 +141,7 @@ const AddPostScreen = ({ navigation, route }) => {
             const url = await storageRef.getDownloadURL();
       
             setLoading(false);
-            setImage(null);
+            //setImage(null);
             return url;
       
         } catch (e) {

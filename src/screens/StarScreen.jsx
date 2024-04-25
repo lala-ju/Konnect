@@ -1,4 +1,4 @@
-import {ActivityIndicator,  View, Text, StyleSheet, Image, SafeAreaView, ScrollView, Alert } from 'react-native';
+import {ActivityIndicator,  View, Text, StyleSheet, Image, SafeAreaView, ScrollView, Alert, FlatList } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { windowHeight } from '../utils/Dimension';
 import DefaultProfileImage from '../assets/images/defaultProfile.png'
@@ -7,6 +7,7 @@ import { Colors } from '../utils/Colors';
 import NumItemBox from '../components/NumItemBox';
 import GeneralButton from '../components/GeneralButton';
 import { AuthContext } from '../navigation/AuthProvider';
+import ActivityCard from '../components/ActivityCard';
 
 const StarScreen = ({navigation, route}) => {
     const {user} = useContext(AuthContext);
@@ -21,7 +22,61 @@ const StarScreen = ({navigation, route}) => {
     const [officialPins, setOfficial] = useState(null);
     const [followTime, setFollowTime] = useState(null);
     const [personalPins, setPersonal] = useState(null);
+    const [activities, setActivities] = useState([]);
 
+    const fetchActivity = async() => {
+        var list = [];
+        try{
+            await firestore()
+            .collection('news')
+            .where('star', '==', name)
+            .orderBy('playTime', 'asc')
+            .get()
+            .then(querySnapShot => {
+                querySnapShot.forEach(doc => {
+                    const{playTime, title, info, img, place, star, starImg, postTime} = doc.data();
+                    list.push({
+                        id: doc.id,
+                        star,
+                        starImg,
+                        title,
+                        info,
+                        img,
+                        place,
+                        playTime,
+                        postTime
+                    })
+                })
+            })
+
+            list = list.map(item => {
+                return (
+                    <ActivityCard
+                        key={item.id}
+                        playTime={item.playTime}
+                        title={item.title}
+                        place={item.place}
+                        onPress={() => {
+                            navigation.navigate('info',
+                            {
+                                star: item.star,
+                                starImg: item.starImg,
+                                postTime: item.postTime,
+                                playTime: item.playTime,
+                                title: item.title,
+                                info: item.info,
+                                img: item.img,
+                                place: item.place
+                            })
+                        }}
+                    />
+                )
+            })
+            setActivities(list);
+        }catch(e){
+            console.log(e)
+        }
+    }
 
     const fetchFollowDetail = async() => {
         try{
@@ -113,6 +168,9 @@ const StarScreen = ({navigation, route}) => {
     }
     
     useEffect(() => {
+        fetchActivity();
+    }, [navigation])
+    useEffect(() => {
         fetchFollowDetail();
     }, [])
 
@@ -124,54 +182,52 @@ const StarScreen = ({navigation, route}) => {
             </View>
         ):(
             <ScrollView style={styles.safe}>
-                <View style={styles.main}>
-                    <View style={styles.container}>
-                    <Image
-                            style = {styles.starImg}
-                            source = {{uri: img? img : Image.resolveAssetSource(DefaultProfileImage).uri}}
+            <View style={styles.main}>
+                <View style={styles.container}>
+                <Image
+                        style = {styles.starImg}
+                        source = {{uri: img? img : Image.resolveAssetSource(DefaultProfileImage).uri}}
+                    />
+                    <Text style={styles.starname}>
+                        {name}
+                    </Text>
+                    <View style={styles.rowContainer}>
+                        <NumItemBox 
+                            num = {pins}
+                            itemName="官方紀錄點"
                         />
-                        <Text style={styles.starname}>
-                            {name}
-                        </Text>
-                        <View style={styles.rowContainer}>
-                            <NumItemBox 
-                                num = {pins}
-                                itemName="官方紀錄點"
-                            />
-                            <NumItemBox 
-                                num = {followers}
-                                itemName="追蹤人數"
-                            />
-                        </View>
-                        <GeneralButton
-                            buttonTitle={follow? "Unfollow": "Follow"}
-                            color={Colors.white}
-                            backgroundColor={Colors.primaryColor}
-                            aligned='center'
-                            width='100%'
-                            onPress={() => {
-                                var updated = ! follow;
-                                updateSituation(updated);
-                            }}
+                        <NumItemBox 
+                            num = {followers}
+                            itemName="追蹤人數"
                         />
                     </View>
-                    <View style={styles.intro}>
-                        <Text style={styles.title}>
-                            介紹
-                        </Text>
-                        <Text style={styles.info}>
-                            {info}
-                        </Text>
-                    </View>
-                    <View style={styles.intro}>
-                        <Text style={styles.title}>
-                            近期活動
-                        </Text>
-                        <Text style={styles.info}>
-                            待更新
-                        </Text>
-                    </View>
+                    <GeneralButton
+                        buttonTitle={follow? "Unfollow": "Follow"}
+                        color={Colors.white}
+                        backgroundColor={Colors.primaryColor}
+                        aligned='center'
+                        width='100%'
+                        onPress={() => {
+                            var updated = ! follow;
+                            updateSituation(updated);
+                        }}
+                    />
                 </View>
+                <View style={styles.intro}>
+                    <Text style={styles.title}>
+                        介紹
+                    </Text>
+                    <Text style={styles.info}>
+                        {info}
+                    </Text>
+                </View>
+                <View style={styles.intro}>
+                    <Text style={styles.title}>
+                        近期活動
+                    </Text>
+                    {activities}
+                </View>
+            </View>
             </ScrollView>
         )}
         </SafeAreaView>
@@ -191,6 +247,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     main:{
+        flex: 1,
         marginTop: windowHeight/15,
         padding: 40,
     },

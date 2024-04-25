@@ -47,17 +47,21 @@ const PinCard = ({
                 {star}
             </Text>
         </View>
-        <View style={styles.subtitle}>
-            <MaterialCommunityIcons
-                name='map-marker'
-                size={25}
-                color={Colors.darkgrey}
-                style={styles.icon}
-            />
-            <Text style={styles.sub}>
-                {addr}
-            </Text>
-        </View>
+        {addr === "" || addr === null? (
+            <></>
+        ):(
+            <View style={styles.subtitle}>
+                <MaterialCommunityIcons
+                    name='map-marker'
+                    size={25}
+                    color={Colors.darkgrey}
+                    style={styles.icon}
+                />
+                <Text style={styles.sub}>
+                    {addr}
+                </Text>
+            </View>
+        )}
         <View style={styles.subtitle}>
             <MaterialCommunityIcons
                 name='clock-time-five-outline'
@@ -69,7 +73,7 @@ const PinCard = ({
                 {getTime(time.toDate())}
             </Text>
         </View>
-        {img === null? (
+        {img === null || img === ""? (
             <></>
         ): (
             <Image

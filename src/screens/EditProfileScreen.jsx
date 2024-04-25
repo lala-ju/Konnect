@@ -25,11 +25,11 @@ const EditProfileScreen = ({navigation, route}) => {
       cropping: true,
       cropperCircleOverlay: true,
     }).then((image) => {
-      console.log(image);
+      //console.log(image);
       const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
       setImage(imageUri);
     });
-    console.log(image);
+    //console.log(image);
   };
 
   const takePhotoFromCamera = () => {
@@ -39,7 +39,7 @@ const EditProfileScreen = ({navigation, route}) => {
       cropping: true,
       cropperCircleOverlay: true
     }).then((image) => {
-      console.log(image);
+      //console.log(image);
       const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
       setImage(imageUri);
     });

@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { Colors } from '../utils/Colors'
+import { windowWidth } from '../utils/Dimension'
 
 const NumItemBox = ({
     num,
@@ -25,7 +26,8 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignItems: 'center',
-        margin: 20,
+        marginHorizontal: 20,
+        marginBottom: 10,
     },
     num:{
         color: Colors.black,

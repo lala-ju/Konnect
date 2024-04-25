@@ -1,28 +1,61 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import DefaultProfileImage from '../assets/images/defaultProfile.png'
 import { Colors } from '../utils/Colors'
 import {windowHeight} from '../utils/Dimension';
+import moment from 'moment'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
+const getTime = (timestamp, option) => {
+  var cur = moment();
+  var temp = moment(timestamp);
+  var diff = cur.diff(temp, 'days');
+  if(option === 0){
+    return temp.format('MM-DD-YYYY');
+  }else{
+    if(diff > 3 || diff < -3){
+      return temp.format('MM-DD-YYYY');
+    }else{
+      return temp.fromNow();
+    }
+  }
+}
 
 const NewsCard = ({
   star,
   starImg,
-  info,
+  postTime,
+  playTime,
+  title,
   img,
+  ...rest
 }) => {
   return (
-    <View style={styles.card}> 
+    <TouchableOpacity style={styles.card}{...rest}> 
         <View style={styles.rowContainer}>
             <Image
             style = {styles.starImg}
-            source = {{uri: starImg === ""? Image.resolveAssetSource(DefaultProfileImage).uri: starImg }}
+            source = {{uri: starImg === "" || starImg === null ? Image.resolveAssetSource(DefaultProfileImage).uri: starImg }}
             />
+            <View>
             <Text style={styles.starTitle}>
                 {star}
             </Text>
+            {postTime === null? (
+              <></>
+            ):(
+              <Text style={styles.postTime}>
+                posted {getTime(postTime.toDate(), 1)}
+              </Text>
+            )}
+            </View>
         </View>
-        {img === ""? (
+        <View style={styles.textbox}>
+            <Text style={styles.info}>
+                {getTime(playTime.toDate(), 0)} {title}
+            </Text>
+        </View>
+        {img === "" || img === null? (
             <></>
         ): (
             <Image
@@ -30,12 +63,7 @@ const NewsCard = ({
             source = {{uri: img}}
             />
         )}
-        <View style={styles.textbox}>
-            <Text style={styles.info}>
-                {info}
-            </Text>
-        </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -45,7 +73,6 @@ const styles = StyleSheet.create({
   card:{
       width: '100%',
       borderRadius: 3,
-      //alignItems: 'center',
       backgroundColor: Colors.lightgrey,
       content: 'fill',
       marginBottom: 10,
@@ -53,6 +80,8 @@ const styles = StyleSheet.create({
   rowContainer:{
     alignItems: 'center',
     flexDirection: 'row',
+    borderBottomWidth: 0.3,
+    borderColor: Colors.darkgrey,
   },
   starImg:{
     height: 40,
@@ -69,21 +98,30 @@ const styles = StyleSheet.create({
       color: Colors.darkgrey,
       marginLeft: 10,
   },
+  postTime:{
+    fontSize: 16,
+    color: Colors.darkgrey,
+    marginLeft: 10,
+  },
   img:{
     width: '100%',
     height: windowHeight / 3,
+    marginVertical: 2,
   },
   textbox:{
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    marginVertical: 2,
   },
   info:{
     marginLeft: 10,
     fontFamily: 'NotoSansTC-Regular', 
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    fontSize: 16, 
+    fontWeight: "800",
+    fontSize: 18, 
+    color: Colors.black,
   }, 
 })

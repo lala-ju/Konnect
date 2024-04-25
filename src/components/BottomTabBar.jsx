@@ -18,6 +18,7 @@ import PersonalPostScreen from '../screens/PersonalPostScreen';
 import AddPostScreen from '../screens/AddPostScreen';
 import AchievementStarScreen from '../screens/AchievementStarScreen';
 import StarScreen from '../screens/StarScreen';
+import ActivityInfoScreen from '../screens/ActivityInfoScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -137,6 +138,20 @@ const MapStack = () => {
           },
         }}
       />
+      <Stack.Screen
+        name="info"
+        component={ActivityInfoScreen}
+        options={{
+          headerTitle: 'Activity Information',
+          headerBackTitleVisible: true,
+          headerBackTitle: 'back',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: Colors.background,
+            elevation: 0,
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -191,6 +206,20 @@ const ExploreStack = () => {
           headerTransparent: true
         }}
       />
+      <Stack.Screen
+        name="info"
+        component={ActivityInfoScreen}
+        options={{
+          headerTitle: 'Activity Information',
+          headerBackTitleVisible: true,
+          headerBackTitle: 'back',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: Colors.background,
+            elevation: 0,
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -210,20 +239,36 @@ const HomeStack = () => {
           },
         }}
       />
+      <Stack.Screen
+        name="info"
+        component={ActivityInfoScreen}
+        options={{
+          headerTitle: 'Activity Information',
+          headerBackTitleVisible: true,
+          headerBackTitle: 'back',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: Colors.background,
+            elevation: 0,
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const BottomTabBar = () => {
   return (
-    <Tab.Navigator screenOptions={() => ({
-      headerShown: false,
-      tabBarShowLabel: false,
-      tabBarActiveTintColor: Colors.primaryColor,
-      tabBarInactiveTintColor: Colors.grey,
-      tabBarStyle: {
-        height: Platform.OS === 'android' ? 56 : 83,
-      },
+    <Tab.Navigator 
+    initialRouteName='Home'
+      screenOptions={() => ({
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: Colors.primaryColor,
+        tabBarInactiveTintColor: Colors.grey,
+        tabBarStyle: {
+          height: Platform.OS === 'android' ? 56 : 83,
+        },
     })}>
       <Tab.Screen
         key={1}

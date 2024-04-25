@@ -23,15 +23,18 @@ const AchievementStarScreen = ({navigation, route}) => {
             <Text style={styles.important}>
                 {days} Days
             </Text>
-            <View style={styles.rowContainer}>
-                <NumItemBox 
-                    num = {official}
-                    itemName="Official Spots"
-                />
-                <NumItemBox 
-                    num = {personal}
-                    itemName="Personal Spots"
-                />
+            <View style={styles.center}>
+                <Text style={styles.visit}>Visited Spots</Text>
+                <View style={styles.rowContainer}>
+                    <NumItemBox 
+                        num = {official}
+                        itemName="Official"
+                    />
+                    <NumItemBox 
+                        num = {personal}
+                        itemName="Personal"
+                    />
+                </View>
             </View>
         </View>
         </SafeAreaView>
@@ -74,8 +77,14 @@ const styles = StyleSheet.create({
         color: Colors.black,
         marginBottom: 5,
     },
-    rowContainer:{
-        flexDirection: 'row',
+    center:{
+        marginTop: 10,
         alignItems: 'center',
     },
+    rowContainer:{
+        flexDirection: 'row',
+    },
+    visit:{
+        fontSize: 18,
+    }
 });
