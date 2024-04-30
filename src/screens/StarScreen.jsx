@@ -116,7 +116,7 @@ const StarScreen = ({navigation, route}) => {
                 .collection('users')
                 .doc(user.uid)
                 .update({
-                    likedStars: firestore.FieldValue.arrayUnion({id: starid, name: name, time: new Date(), official: 0, personal: 0}),
+                    likedStars: firestore.FieldValue.arrayUnion({id: starid, name: name, time: new Date(), official: 0, personal: 0, img: img}),
                 });
             }else{
                 newfollower -= 1;
@@ -124,7 +124,7 @@ const StarScreen = ({navigation, route}) => {
                 .collection('users')
                 .doc(user.uid)
                 .update({
-                    likedStars: firestore.FieldValue.arrayRemove({id: starid, name: name, time: followTime, official: officialPins, personal: personalPins})
+                    likedStars: firestore.FieldValue.arrayRemove({id: starid, name: name, time: followTime, official: officialPins, personal: personalPins, img: img})
                 });
             }
 

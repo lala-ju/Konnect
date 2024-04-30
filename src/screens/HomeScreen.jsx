@@ -10,6 +10,7 @@ const HomeScreen = ({ navigation }) => {
   const [news, setNews] = useState([]);
   const [liked, setLiked] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [back, setBack] = useState(true);
 
   const fetchlikedStar = async () => {
     try {
@@ -65,6 +66,11 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     fetchNews();
   }, [liked])
+
+  useEffect(() => {
+    fetchlikedStar();
+    navigation.addListener("focus", () => setBack(!back));
+  }, [back])
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -124,6 +130,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 20,
+    // marginTop: 20,
   },
 })

@@ -6,13 +6,13 @@ import { Colors } from '../utils/Colors';
 import NumItemBox from '../components/NumItemBox';
 
 const AchievementStarScreen = ({navigation, route}) => {
-    const {name, official, personal, days} = route.params;
+    const {name, official, personal, days, img} = route.params;
     return (
         <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
            <Image
                 style = {styles.starImg}
-                source = {{uri: Image.resolveAssetSource(DefaultProfileImage).uri}}
+                source = {{uri: img === "" || img === null? Image.resolveAssetSource(DefaultProfileImage).uri:img}}
             />
             <Text style={styles.starname}>
                 {name}

@@ -496,6 +496,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'flex-start',
     marginLeft: 5,
+    backgroundColor: Colors.white,
   },
   icon: {
     color: Colors.black,

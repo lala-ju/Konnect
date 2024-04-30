@@ -15,7 +15,7 @@ const AchievementCard = ({
         <View style={styles.rowContainer}>
             <Image
             style = {styles.starImg}
-            source = {{uri: Image.resolveAssetSource(DefaultProfileImage).uri}}
+            source = {{ uri: img === "" || img === null?Image.resolveAssetSource(DefaultProfileImage).uri: img}}
             />
             <View style = {styles.subcontainer}>
                 <Text style={styles.starTitle}>

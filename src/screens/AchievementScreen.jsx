@@ -68,11 +68,12 @@ const AchievementScreen = ({navigation}) => {
             <AchievementCard
               starname={item.name}
               days={days(item.time.toDate())} 
-              img=""
+              img={item.img}
               onPress={() => navigation.navigate(
                 'AchieveStar', 
                 {
                   name: item.name,
+                  img: item.img,
                   official: item.official,
                   personal: item.personal,
                   days: days(item.time.toDate()),
